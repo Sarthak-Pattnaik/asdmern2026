@@ -1,0 +1,27 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #EEE;
+}
+.menu{
+    height: 60px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    padding-top: 15px;
+}
+.menu nav ul li{
+    display: inline-block;
+}
+.menu nav ul li .nav{
+    text-decoration: none;
+    color: #000;
+    margin-left: 25px;
+}
+.card .card-body label{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.card .card-body input[type="text"], input[type="email"], input[type="file"]{
+    height: 50px;
+    border-radius: 15px;
+}
