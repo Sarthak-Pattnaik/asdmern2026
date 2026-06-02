@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../model/user-model.js');
 const multer = require('multer');
+const {getUser} = require('../controller/user-controller.js');
 
 const router = express.Router();
 
@@ -24,14 +25,14 @@ router.post('/add', upload.single('image'), async (req,res) =>{
             name : req.body.name,
             mobile : req.body.mobile,
             email : req.body.email,
-            image : req.body.image
+            image : files.filename
         });
         user.save();
         res.status(201).json("Data Inserted");
     } catch (error) {
         console.log("Error while inserting data", error);
     }
-})
+});
 
-
+router.get('/all', getUser);
 module.exports = router;

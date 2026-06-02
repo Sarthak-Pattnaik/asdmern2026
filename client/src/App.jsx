@@ -5,6 +5,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Create from './components/Create';
+import View from './components/View';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Dashboard />}></Route>
           <Route path='/Create' element={<Create />}></Route>
+          <Route path='/View' element={<View />}></Route>
         </Routes>
       </Router>
     </>
