@@ -16,3 +16,19 @@ export const getUsers = async () =>{
         console.error("Error while get API", error);
     }
 }
+
+export const deleteData = async (data) =>{
+    try {
+        return await axios.post(`${URL}/delete`, data);
+    } catch (error) {
+        console.log("Error While Creating API with Delete Data", error);  
+    }
+}
+
+export const getDataEdit = async (data) =>{
+    try {
+        return await axios.post(`${URL}/getuser`, data);
+    } catch (error) {
+        console.log("Error while get edit data", error);
+    }
+}

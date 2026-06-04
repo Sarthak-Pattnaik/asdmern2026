@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../model/user-model.js');
 const multer = require('multer');
-const {getUser} = require('../controller/user-controller.js');
+const {getUser, deleteUser, getEditData} = require('../controller/user-controller.js');
 
 const router = express.Router();
 
@@ -35,4 +35,6 @@ router.post('/add', upload.single('image'), async (req,res) =>{
 });
 
 router.get('/all', getUser);
+router.post('/delete', deleteUser);
+router.post('/getuser', getEditData);
 module.exports = router;
