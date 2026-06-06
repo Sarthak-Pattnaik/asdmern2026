@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getDataEdit } from "../apis/uersApi.js";
+import { useNavigate, useParams } from "react-router-dom";
+import { getDataEdit, updateUser as updateUserApi } from "../apis/uersApi.js";
 import Navbar from "./Navbar.jsx";
 
 const EditData = () => {
 
-    const {id} = useParams()
+    const navigate = useNavigate();
+    const { id } = useParams()
 
     const getAllUser = async () => {
         const res = await getDataEdit({ id });
@@ -17,18 +18,33 @@ const EditData = () => {
     }, []);
 
     const [user, setUser] = useState({
-        _id:"",
-        name:""
+        _id: "",
+        name: "",
+        mobile: "",
+        email: ""
     });
 
-    const onValueChange = (e) =>{
-        setUser({...user, [e.target.name] : e.target.value});
+    const onValueChange = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value });
         console.log(user);
+    }
+
+    const updateUser = async (e) =>{
+        e.preventDefault();
+        try {
+            const res = await updateUserApi(user);
+            if(res.status === 201){
+                alert(res.data);
+                navigate('/View');
+            }
+        } catch (error) {
+            console.log("Error While update", error);
+        }
     }
 
     return (
         <>
-             <Navbar />
+            <Navbar />
             <section>
                 <div className='container mt-3'>
                     <div className='row'>
@@ -40,21 +56,16 @@ const EditData = () => {
                                 <div className='card-body'>
                                     <form>
                                         <label>Name</label>
-                                        <input type='text' name='name' className='form-control' value={user.name}></input>
+                                        <input type='text' name='name' onChange={onValueChange} className='form-control' value={user.name}></input>
 
                                         <label>Mobile</label>
-                                        <input type='text' name='mobile' className='form-control' value={user.mobile}></input>
+                                        <input type='text' name='mobile' onChange={onValueChange} className='form-control' value={user.mobile}></input>
 
                                         <label>Email</label>
-                                        <input type='email' name='email'  className='form-control' value={user.email}></input>
+                                        <input type='email' name='email' onChange={onValueChange} className='form-control' value={user.email}></input>
 
-                                        <label>Image</label>
-                                        <input type='file' name='image' className='form-control'></input> <br></br>
-                                        
-                                        <p>Old Image</p>
-                                        <img src={`http://localhost:8000/uploads/${user.image}`} alt={user.image} height={'100px'} width={'100px'} className="img-thumbnail"></img>
                                         <div className='mt-3' style={{ display: 'block', float: 'right' }}>
-                                            <button className='btn btn-primary'>Submit</button>
+                                            <button className='btn btn-primary' onClick={updateUser}>Submit</button>
                                         </div>
                                     </form>
                                 </div>

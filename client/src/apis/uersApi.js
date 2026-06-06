@@ -32,3 +32,11 @@ export const getDataEdit = async (data) =>{
         console.log("Error while get edit data", error);
     }
 }
+
+export const updateUser = async (data) =>{
+    try {
+        return await axios.post(`${URL}/update`, data);
+    } catch (error) {
+        console.log("Error While update api", error);
+    }
+}

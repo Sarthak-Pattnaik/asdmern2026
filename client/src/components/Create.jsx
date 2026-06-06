@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar';
 import { addUser } from '../apis/uersApi.js';
+import { useRef } from 'react';
 
 const Create = () => {
 
@@ -20,11 +21,13 @@ const Create = () => {
         setUser({ ...user, image: e.target.files[0] });
     }
 
+    const validName = useRef(null);
     const submitData = async (e) => {
         e.preventDefault();
         // validation (client side validation)
         if (user.name === '') {
             alert("Enter Your Name");
+            validName.current.focus();
             return;
         }
         if (user.mobile === '') {
@@ -75,7 +78,7 @@ const Create = () => {
                                 <div className='card-body'>
                                     <form>
                                         <label>Name <sup><span style={{ color: 'red' }}>*</span></sup></label>
-                                        <input type='text' name='name' onChange={getData} className='form-control' placeholder='Enter Your Name'></input>
+                                        <input type='text' name='name' onChange={getData} ref={validName} className='form-control' placeholder='Enter Your Name'></input>
 
                                         <label>Mobile <sup><span style={{ color: 'red' }}>*</span></sup></label>
                                         <input type='text' name='mobile' onChange={getData} className='form-control' placeholder='Enter Your Mobile'></input>

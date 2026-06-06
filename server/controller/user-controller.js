@@ -27,8 +27,24 @@ const getEditData = async (req, res) => {
     }
 }
 
+const updateData = async (req, res) => {
+    try {
+        await User.updateOne({ _id: req.body._id }, {
+            $set : {
+                name : req.body.name,
+                mobile : req.body.mobile,
+                email : req.body.email
+            }
+        });
+        res.status(201).json("Data Updated");
+    } catch (error) {
+        console.log("Error while update controller", error);
+    }
+}
+
 module.exports = {
     getUser,
     deleteUser,
-    getEditData
+    getEditData,
+    updateData
 }
